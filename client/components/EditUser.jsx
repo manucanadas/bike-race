@@ -21,6 +21,15 @@ export class EditUser extends React.Component {
     bikeType: this.props.activeUser.bikeType,
     redirect: false
   }
+
+  checkForExistingUser =(newUsername)=>{
+    let checkUsername = this.props.users.filter(user => user.username.includes(newUsername))
+    if(checkUsername.length != 0){
+      if(this.props.activeUser.username == checkUsername[0].username) return true
+      else return false
+    }else return true
+  }
+
   handleImageChange =(event)=>{
     let file = event.target.files[0]
     console.log()
@@ -37,10 +46,15 @@ export class EditUser extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    let updatedUser = {...this.state}
-    delete updatedUser.redirect
-    this.props.dispatch(editUser(this.props.activeUser.id, updatedUser))
-    this.setState({redirect: true})
+    if(this.checkForExistingUser(this.state.username)){
+      let updatedUser = {...this.state}
+      delete updatedUser.redirect
+      this.props.dispatch(editUser(this.props.activeUser.id, updatedUser))
+      this.setState({redirect: true})
+    }else{
+      alert("Sorry Username Taken")
+    }
+
   }
 
   render() {
@@ -103,7 +117,8 @@ export class EditUser extends React.Component {
 
 function mapStateToProps(globalState) {
   return {
-    activeUser: globalState.activeUser
+    activeUser: globalState.activeUser,
+    users: globalState.users,
   }
 }
 
