@@ -14,6 +14,7 @@ const reducer = (state = [], action) => {
     let updateUser = newState.find((user,i) =>{
      if(user.id == action.user.id) return newState[i] = action.user
     })
+
     return newState
 
     default:
