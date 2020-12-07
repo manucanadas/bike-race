@@ -22,6 +22,10 @@ export class CreateUser extends React.Component {
     redirect: false
   }
   
+  checkForExistingUser =(newUsername)=>{
+    let checkUsername = this.props.users.filter(user => user.username.includes(newUsername))
+    return checkUsername.length == 0
+  }
 
   handleChange = evt => {
     this.setState({
@@ -31,17 +35,23 @@ export class CreateUser extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-    let newUser = { ...this.state }
-    delete newUser.redirect
-    this.props.dispatch(addNewUser(newUser))
-    this.props.dispatch(changeActiveUser(newUser))
-    this.setState({
-      imgURL: '',
-      username: '',
-      email: '',
-      bikeType: '',
-      redirect: true
-    })
+    
+    if(this.checkForExistingUser(this.state.username)){
+      let newUser = { ...this.state }
+      delete newUser.redirect
+      this.props.dispatch(addNewUser(newUser))
+      this.props.dispatch(changeActiveUser(newUser))
+      this.setState({
+        imgURL: '',
+        username: '',
+        email: '',
+        bikeType: '',
+        redirect: true
+      })
+    }else{
+      alert("Sorry Username Taken")
+    }
+
   }
 
   handleTakePhoto = (dataUri) => {
@@ -104,4 +114,10 @@ export class CreateUser extends React.Component {
   }
 }
 
-export default connect()(CreateUser)
+function mapStateToProps(globalState) {
+  return {
+    users: globalState.users,
+  }
+}
+
+export default connect(mapStateToProps)(CreateUser)
