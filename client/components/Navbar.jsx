@@ -1,86 +1,107 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
+import { removeActiveUser } from '../actions/users';
 
-// import { Button } from './Button';
+class Navbar extends React.Component {
 
-function Navbar(props) {
-  const [click, setClick] = useState(false);
-  const [button, setButton] = useState(true)
+  state = {
+    click: false,
+    button: true
+  }
 
-  const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
+  handleClick = () => {
+    this.setState({ click: !this.state.click })
+  }
 
-  const showButton = () => {
+  closeMobileMenu = () => {
+    this.setState({ click: false })
+  }
+
+  showButton = () => {
     if (window.innerWidth <= 960) {
-      setButton(false);
+      this.setState({ button: false })
     } else {
-      setButton(true);
+      this.setState({ button: true })
     }
-  };
+  }
 
-  useEffect(() => {
-    showButton();
-  }, []);
+  componentDidMount() {
+    this.showButton()
+  }
 
-  window.addEventListener('resize', showButton);
+  render() {
 
-  return (
-    <>
-      <nav className="navbar">
-        <div className="navbar-container">
-          <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
-            BikeMate <i className='fas fa-biking' />
-          </Link>
-          <div className='menu-icon' onClick={handleClick}>
-            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+    return (
+      <>
+        <nav className="navbar">
+          <div className="navbar-container">
+            <Link to="/" className="navbar-logo" onClick={this.closeMobileMenu}>
+              BikeMates <i className='fas fa-biking' />
+            </Link>
+            <div className='menu-icon' onClick={this.handleClick}>
+              <i className={this.state.click ? 'fas fa-times' : 'fas fa-bars'} />
+            </div>
+
+            <ul className={this.state.click ? 'nav-menu active' : 'nav-menu'}>
+
+              {this.props.activeUser &&
+                <li className='nav-item'>
+                  <Link to='/events/new' className='nav-links' onClick={this.closeMobileMenu}>
+                    Create Event
+                </Link>
+                </li>
+              }
+
+              {this.props.activeUser &&
+                <li className='nav-item'>
+                  <Link to='/events' className='nav-links' onClick={this.closeMobileMenu}>
+                    View Events
+                </Link>
+                </li>
+              }
+
+              {this.props.activeUser &&
+              <li className='nav-item'>
+                <Link to='/users/active' className='nav-links' onClick={this.closeMobileMenu}>
+                  {this.props.activeUser.username}
+                </Link>
+              </li>
+              }
+
+              {this.props.activeUser &&
+                <li className='nav-item'>
+                  <Link to='' className='nav-links' onClick={() => {
+                    this.closeMobileMenu()
+                    this.props.dispatch(removeActiveUser())
+                  }}>
+                    Logout
+                  </Link>
+                </li>
+              }
+
+              {!this.props.activeUser &&
+                <li className='nav-item'>
+                  <Link to='/users/new' className='nav-links' onClick={this.closeMobileMenu}>
+                    Sign up!
+                </Link>
+                </li>
+              }
+
+              {!this.props.activeUser &&
+                <li className='nav-item'>
+                  <Link to='/login' className='nav-links' onClick={this.closeMobileMenu}>
+                    Login
+                </Link>
+                </li>
+              }
+
+            </ul>
           </div>
-          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-
-            {!props.activeUser &&
-              <li className='nav-item'>
-                <Link to='/users/new' className='nav-links' onClick={closeMobileMenu}>
-                  Create Profile
-              </Link>
-              </li>
-            }
-
-       
-              <li className='nav-item'>
-                <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                  Home
-              </Link>
-              </li>
-            
-
-            {props.activeUser &&
-              <li className='nav-item'>
-                <Link to='/events/new' className='nav-links' onClick={closeMobileMenu}>
-                  Create Event
-              </Link>
-              </li>
-            }
-
-            {props.activeUser &&
-              <li className='nav-item'>
-                <Link to='/events' className='nav-links' onClick={closeMobileMenu}>
-                  Events Page
-              </Link>
-              </li>
-            }
-
-            <li className='nav-item'>
-              <Link to='/users/active' className='nav-links' onClick={closeMobileMenu}>
-                {props.activeUser && props.activeUser.username}
-              </Link>
-            </li>
-
-          </ul>
-          {/* {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>} */}
-        </div>
-      </nav>
-    </>
-  );
+        </nav>
+      </>
+    )
+  }
 }
 
 function ms2p(globalState) {

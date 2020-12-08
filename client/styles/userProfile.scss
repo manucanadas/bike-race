@@ -1,6 +1,8 @@
 .profilePageHeader{
   text-align: center;
   color: #BFC0C0;
+  margin-top: 8px;
+  margin-bottom: 8px;
  
 }
 
@@ -32,6 +34,8 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
+  margin-bottom: 10px;
+  background-color: rgba($color: #ac7777, $alpha: 0.5);
 }
 
 .userInfoPP{
@@ -63,76 +67,7 @@ list-style-type: none;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 40px;
+  margin-top: 10px;
   // width: 50%;
 }
-
-
-/* Fifth Button */
-
-.button{
-  display: flex;
-  height: 40px;
-  width: 150px;
-  border: 2px solid snow;
-  margin: 40px auto 20px auto;
-  color: #BFC0C0;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-size: .8em;
-  letter-spacing: 1.5px;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-}
-
-.actual-button{
-  height: 40px;
-  width: 100%;
-  background: none;
-  border: 0;
-  line-height: 40px;
-  color: snow;
-  text-align: center;
-}
-
-a {
-  color: #BFC0C0;
-  text-decoration: none;
-  letter-spacing: 1px;
-}
-
-/* Fifth Button */
-
-#button-5 {
-  position: relative;
-  overflow: hidden;
-  cursor: auto;
-}
-
-#button-5 a {
-  position: relative;
-  transition: all .25s ease-Out;
-}
-
-#translate {
-  transform: rotate(50deg);
-  width: 100%;
-  height: 250%;
-  left: -200px;
-  top: -30px;
-  background: #BFC0C0;
-  position: absolute;
-  transition: all .3s ease-Out;
-}
-
-#button-5:hover #translate {
-  left: 0;
-}
-
-#button-5:hover a {
-  color: #2D3142;
-}
-
 

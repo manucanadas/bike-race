@@ -1,6 +1,36 @@
 .each_user{
  list-style-type: none;
 }
+
 .event_name{
     text-align: center;
+}
+
+.content_container-event-details{
+text-align: left;
+color: #fff;
+margin: 0;
+padding: 5px;
+
+width: calc(100vw - 30px);
+max-height: 275px;
+background-color: rgba($color: #2D3142, $alpha: 1);
+z-index: 0;
+bottom:0;
+justify-content: center;
+padding-left: 15px;
+padding-right: 15px;
+
+
+}
+.testmap{
+    text-align: center;
+}
+
+.eventDetailsInfo{
+    margin-top: 30px;
+}
+
+.attendees{
+    padding-bottom: 25px;
 }

@@ -5,6 +5,7 @@ export const USER_ADDED = 'USER_ADDED'
 export const ACTIVE_USER_CHANGED = 'ACTIVE_USER_CHANGED'
 export const USER_UPDATED = 'USER_UPDATED'
 export const ACTIVE_USER_UPDATED = 'ACTIVE_USER_UPDATED'
+export const ACTIVE_USER_REMOVED = 'ACTIVE_USER_REMOVED'
 
 export const fetchUsers = () => {
   return dispatch => {
@@ -56,5 +57,11 @@ export const changeActiveUser = user => {
   return {
     type: ACTIVE_USER_CHANGED,
     user
+  }
+}
+
+export const removeActiveUser = () => {
+  return {
+    type: ACTIVE_USER_REMOVED,
   }
 }

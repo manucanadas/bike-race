@@ -5,11 +5,12 @@
 .editUserBox{
     border: 3px solid;
     border-color: snow;
-    width: fit-content;
+    width: min-content;
     display: block;
     margin: 20px auto 20px auto;
     border-radius: 5%;
     align-items: center;
+    background-color: rgba($color: #ac7777, $alpha: 0.5);
 }
 
 
@@ -46,7 +47,7 @@ color: #BFC0C0;
     height: 40px;
     width: 150px;
     border: 2px solid snow;
-    margin: 40px auto 20px auto;
+    margin: 10px auto 10px auto;
     color: #BFC0C0;
     text-transform: uppercase;
     text-decoration: none;
@@ -55,10 +56,11 @@ color: #BFC0C0;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    position: relative;
   }
   
   button {
-    // color: #BFC0C0;
+    color: #BFC0C0;
     text-decoration: none;
     letter-spacing: 1px;
   }

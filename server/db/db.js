@@ -1,19 +1,9 @@
 const connection = require('./connection')
 
+// --------------- EVENT FUNCS -------------------------
+
 function getEvents (db = connection) {
   return db('events').select()
-}
-
-function getComments (db = connection) {
-  return db('comments').select()
-}
-
-function getAttendees (db = connection) {
-  return db('users_events').select()
-}
-
-function getUsers (db = connection) {
-  return db('users').select()
 }
 
 function addEvent (newEvent, db = connection) {
@@ -23,6 +13,12 @@ function addEvent (newEvent, db = connection) {
     })
 }
 
+// --------------- USER FUNCS ----------------------------
+
+function getUsers (db = connection) {
+  return db('users').select()
+}
+
 function addUser (user, db = connection) {
   return db('users').insert(user, 'id')
 }
@@ -30,11 +26,6 @@ function addUser (user, db = connection) {
 function editUser (id, user, db = connection) {
   return db('users').update(user).where('id', id)
 }
-
-function addComment (comment, db = connection) {
-  return db('comments').insert(comment, 'id')
-}
-
 
 function addUserToEvent(activeUser, db = connection){
   return db('users_events').insert(activeUser, {
@@ -50,6 +41,19 @@ function removeUserFromEvent(activeUser, db = connection){
   .delete()
 }
 
+function getAttendees (db = connection) {
+  return db('users_events').select()
+}
+
+// --------------- COMMENT FUNCS ------------------------
+
+function getComments (db = connection) {
+  return db('comments').select()
+}
+
+function addComment (comment, db = connection) {
+  return db('comments').insert(comment, 'id')
+}
 
 module.exports = {
   getEvents,

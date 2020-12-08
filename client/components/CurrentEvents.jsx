@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 class CurrentEvents extends React.Component {   
   render() {
     return (
-      <>
+      <div>
       <h1 className='curretnEventsHeader'>Upcoming Events</h1>
          <ul className='event--li'>
           {this.props.events.map( event => { 
@@ -19,19 +19,18 @@ class CurrentEvents extends React.Component {
     
             if(currentTime < event.startTime){
             return (
-                <li key={event.id} 
-                      >
+              <div key={event.id} className='event-cards'>
+                <li>
                     <Link to={`events/${event.id}`}>
-                        <h2 className='eventListTitle'>{event.eventName}</h2>
-                        <h4>{`Time: ${raceTime}`}</h4> 
+                        <h2 className='eventListTitle'>{event.eventName}</h2></Link>
                         <h4>{`Date: ${raceDate}`}</h4>
-                        <p>{event.description}</p>
-                    </Link>
+                        <h4>{`Time: ${raceTime}`}</h4> 
                 </li>
+              </div>
             )
             }})}
         </ul>
-      </>
+      </div>
     )
   }
 }

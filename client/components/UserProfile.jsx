@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 export class UserProfile extends React.Component {
 
   attendingEvents = this.props.events.filter(event => event.attendees.includes(this.props.activeUser.id))
-
   render() {
     const currentTime = Date.now() / 1000
     return (
@@ -44,7 +43,7 @@ export class UserProfile extends React.Component {
 
           <div className='upcomingEventsContainer'>
             <h3>Past events</h3>
-          {this.attendingEvents.map(event => {
+            {this.attendingEvents.map(event => {
               if (event.startTime < currentTime) {
                 return (
                   <>

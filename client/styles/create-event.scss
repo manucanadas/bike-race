@@ -6,7 +6,7 @@
   position: fixed;
   text-align: center;
   width: 100vw;
-  z-index: 999;
+  z-index: 1;
 }
 
 .event-form input {
@@ -15,8 +15,28 @@
   border-radius: 5px;
 }
 
+@media screen and (min-width: 764px) {
+  .event-form {
+    width: 50%;
+    background-color: #bcbcbc;
+    bottom: 0vh;
+    height: auto;
+    padding-top: 8px;
+    position: fixed;
+    text-align: center;
+    margin-left: 25%;
+    margin-right: 25%;
+    z-index: 1;
+    border: 3px solid black;
+  }
+}
 .event-form textarea {
   margin-bottom: 8px;
   width: 90%;
   border-radius: 5px;
+}
+
+.eventStartLabel{
+  margin-bottom: 15px;
+  color: #fff;
 }

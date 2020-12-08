@@ -6,6 +6,19 @@ import MainMap from './MainMap'
 import { addEvent } from '../actions/createEvent'
 
 class CreateEvent extends React.Component {
+
+  getTodaysDate = () => {
+    let tzoffset = (new Date()).getTimezoneOffset() * 60000 //offset in milliseconds
+    let localISODate = (new Date(Date.now() - tzoffset)).toISOString().split('T')[0]
+    return localISODate
+  }
+
+  getTimeNow = () => {
+    let tzoffset = (new Date()).getTimezoneOffset() * 60300 
+    let localTime = (new Date(Date.now() - tzoffset)).toISOString().split('T')[1].slice(0,5)
+    return localTime
+  }
+
   state = {
     newEvent: {
       creator_id: this.props.activeUser.id,
@@ -17,6 +30,8 @@ class CreateEvent extends React.Component {
       maxGroupSize: 8,
       distance: null
     },
+    time: this.getTimeNow(),
+    date: this.getTodaysDate(),
     redirect: false
   }
 
@@ -61,12 +76,6 @@ class CreateEvent extends React.Component {
     }
   }
 
-  getTodaysDate = () => {
-    let tzoffset = (new Date()).getTimezoneOffset() * 60000 //offset in milliseconds
-    let localISODate = (new Date(Date.now() - tzoffset)).toISOString().split('T')[0]
-    return localISODate
-  }
-
   render() {
     const redirect = this.state.redirect
     if (redirect) {
@@ -79,20 +88,32 @@ class CreateEvent extends React.Component {
         <div className='form-container'>
           <form className='event-form' action="submit" onSubmit={this.handleSubmit}>
             <input type="text" name='eventName' placeholder='Event name' onChange={this.handleChange} />
-            <textarea id="" cols="30" rows="5" name='description' placeholder='A brief description of your event' onChange={this.handleChange}></textarea>
-            <label htmlFor="time">Event starts:</label>
+
+            <textarea id="" cols="30" rows="5" 
+            name='description' 
+            placeholder='A brief description of your event' 
+            onChange={this.handleChange}></textarea><br />
+            
+            <label htmlFor="time" className='eventStartLabel'>Event time:</label><br />
+
             <input type="time"
               name='time'
               placeholder='time'
-              defaultValue='10:00'
+              defaultValue={this.getTimeNow()}
               onChange={this.handleTimeChange} />
+
             <input type="date"
               name='date'
               placeholder='date'
               min={this.getTodaysDate()}
               defaultValue={this.getTodaysDate()}
               onChange={this.handleTimeChange} />
-            <input type="submit" name='submit' />
+
+            <div className="button" id="button-5">
+              <div id="translate"></div>
+              <button className='actual-button'>Submit</button>
+            </div>
+
           </form>
         </div>
       </>

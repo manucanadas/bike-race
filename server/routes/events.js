@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const db = require('../db/db')
 
-//get all events (on page load)
+//GET ALL EVENTS (on page load)
+
 router.get('/', (req, res) => {
   let events
   return db.getEvents()
@@ -31,6 +32,8 @@ router.get('/', (req, res) => {
       res.status(500).json({ message: 'Somthing went wrong' })
     })
 })
+
+// ADD NEW EVENT
 
 router.post('/new', (req, res) => {
   const newEvent = req.body
