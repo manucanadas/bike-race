@@ -35,7 +35,6 @@ export class CreateUser extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-<<<<<<< HEAD
     
     if(this.checkForExistingUser(this.state.username)){
       let newUser = { ...this.state }
@@ -43,7 +42,7 @@ export class CreateUser extends React.Component {
       this.props.dispatch(addNewUser(newUser))
       this.props.dispatch(changeActiveUser(newUser))
       this.setState({
-        imgURL: '',
+        imgURL: 'https://www.harmonytoc.com/Content/img/offline/tool/audit/placeholder.png',
         username: '',
         email: '',
         bikeType: '',
@@ -53,19 +52,6 @@ export class CreateUser extends React.Component {
       alert("Sorry Username Taken")
     }
 
-=======
-    let newUser = { ...this.state }
-    delete newUser.redirect
-    this.props.dispatch(addNewUser(newUser))
-    this.props.dispatch(changeActiveUser(newUser))
-    this.setState({
-      imgURL: 'https://www.harmonytoc.com/Content/img/offline/tool/audit/placeholder.png',
-      username: '',
-      email: '',
-      bikeType: '',
-      redirect: true
-    })
->>>>>>> 161fb9e4b32a69138d5b3f0e5787ec77eea08e57
   }
 
   handleTakePhoto = (dataUri) => {
